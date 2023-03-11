@@ -1,0 +1,28 @@
+debug: false  #디버그 로그를 활성화 할 것인지
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    com.fastcampus.projectboard: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace  #쿼리로그를 디버그로그로 관찰할 수 있는데 안에 들어가는 바인딩 파라미터들이 ? 관찰 가능하게끔 해주는
+
+spring:
+   datasource:
+     url: jdbc:mysql://localhost:3306/board
+     username: moho
+     password: 12345678
+     driver-class-name: com.mysql.cj.jdbc.Driver
+   jpa:
+     defer-datasource-initialization: true
+     hibernate.ddl-auto: create #자동으로 ddl을 만들어줌
+     #open-in-view: false
+     show-sql: true
+     properties:
+       hibernate.format_sql: true #한줄로 나와야하는 디버그 포맷을 깔끔하게
+       hibernate.default_batch_fetch_size: 100 #여러 연관관계로 맺어진 테이블을 select할 때 한꺼번에 뽑아주는 설정
+   h2.console.enabled: false
+   sql.init.mode: always  #약속을 정해서 만든 data.sql을 언제 작동시킬것인가 (Always,NEVER,EMBEDDED)
+     # thymeleaf.cache: false
+
+---
